@@ -1,0 +1,3 @@
+document.getElementById('contenu').innerHTML = "<%= j render 'show_email', email: @email %>"; // Modifier le contenu montré
+document.querySelector('#email<%= @email.id%> span').innerHTML=""; //Marquer comme lu
+document.querySelector('#email<%= @email.id%>  > div > div.align-self-center.text-right > form:nth-child(2) > input.btn.btn-light.btn-sm').value = "marquer non lu";

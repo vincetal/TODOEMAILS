@@ -1,0 +1,12 @@
+<% if @email.read %>
+  //Si on lit le message, on enlève la pastille et on change le nom du bouton, et on modifie l'action
+  document.querySelector('#email<%= @email.id%> span').innerHTML="";
+  document.querySelector('#email<%= @email.id%>  > div > div.align-self-center.text-right > form:nth-child(2) > input.btn.btn-light.btn-sm').value = "marquer non lu";
+  document.querySelector('#email<%= @email.id%> > div > div.align-self-center.text-right > form:nth-child(2) > input[type=hidden]:nth-child(4)').value = <%= !@email.read%>;
+
+<% else %>
+  // Si on marque le message comme non lu, on ajoute la pastille et on change le nom du bouton et on modifie l'action
+  document.querySelector('#email<%= @email.id%> span').innerHTML=" ";
+  document.querySelector('#email<%= @email.id%>  > div > div.align-self-center.text-right > form:nth-child(2) > input.btn.btn-light.btn-sm').value = "marquer lu";
+  document.querySelector('#email<%= @email.id%> > div > div.align-self-center.text-right > form:nth-child(2) > input[type=hidden]:nth-child(4)').value = <%= !@email.read%>;
+<% end %>

@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <%= button_to "Recevoir email", emails_path, class:"btn btn-primary", :remote=>true %>
+  </div>
+  <br>
+  <div class="row">
+
+    <div class="col-6" id="emails">
+      <h3>emails</h3>
+      <% @emails.each do  |email|%>
+
+          <div class="card" id="email<%= email.id%>">
+            <div class="card-body p-2 d-flex justify-content-between">
+              <div class="">
+                <%= link_to email_path(email.id), class:"text-decoration-none text-muted", remote:true do %>
+                  <% if email.read %>
+                    <span class="badge badge-pill badge-primary"></span>
+                  <% else %>
+                    <span class="badge badge-pill badge-primary"> </span>
+                  <% end %>
+                  <h6 class="card-title"><%=email.id%>) Object: <%=email.object%></h6>
+                  <p class="card-text"><%=email.body.truncate(20)%></p>
+                <% end %>
+              </div>
+
+              <div class="align-self-center text-right">
+                <%= button_to 'supprimer', email_path(email.id), class: 'btn btn-danger btn-sm',
+                    data: {:confirm => 'Es-tu sûr?'}, :method => :delete, remote:true   %>
+                <% if email.read %>
+                  <%= button_to 'marquer non lu', email_path(email.id), class: 'btn btn-light btn-sm', method: "put", params:{read:false}, remote:true  %>
+                <% else %>
+                  <%= button_to 'marquer lu', email_path(email.id), class: 'btn btn-light btn-sm', method: "put", params:{read:true}, remote:true  %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+      <% end %>
+    </div>
+
+    <div class="col-6">
+      <h3>Content</h3>
+      <div class="sticky-top card" id="contenu">
+      </div>
+    </div>
+
+
+  </div>
+</div>
